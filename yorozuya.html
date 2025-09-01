@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yorozuya - Anything and Everything</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* 全局样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* 头部样式 */
+        header {
+            background-color: #5D8CAE;
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 2.2rem;
+            font-weight: bold;
+        }
+        
+        .logo span {
+            color: #86ABA5;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin: 0 15px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 8px 15px;
+            border-radius: 3px;
+            transition: background-color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        /* 横幅区域 */
+        .banner {
+            height: 500px;
+            background: linear-gradient(rgba(93, 140, 174, 0.8), rgba(93, 140, 174, 0.8)), 
+                        url('https://images.unsplash.com/photo-1579546929662-711aa81148cf?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 0 20px;
+        }
+        
+        .banner h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .banner p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin-bottom: 30px;
+        }
+        
+        .btn {
+            background-color: #86ABA5;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            background-color: #7a9d97;
+        }
+        
+        /* 服务介绍 */
+        .services {
+            padding: 80px 0;
+            background-color: white;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            color: #5D8CAE;
+            font-size: 2.5rem;
+            position: relative;
+        }
+        
+        .section-title:after {
+            content: "";
+            display: block;
+            width: 100px;
+            height: 4px;
+            background-color: #86ABA5;
+            margin: 15px auto;
+        }
+        
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .service-card {
+            background-color: #f8f9fa;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-top: 4px solid #5D8CAE;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .service-card i {
+            font-size: 3rem;
+            color: #5D8CAE;
+            margin-bottom: 20px;
+        }
+        
+        .service-card h3 {
+            color: #5D8CAE;
+            margin: 15px 0;
+            font-size: 1.5rem;
+        }
+        
+        /* 人物介绍 */
+        .team {
+            padding: 80px 0;
+            background-color: #f0f4f8;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        .team-member {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .team-member:hover {
+            transform: translateY(-5px);
+        }
+        
+        .member-img {
+            height: 280px;
+            background-color: #5D8CAE;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .member-img:after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 40%;
+            background: linear-gradient(to top, rgba(93, 140, 174, 0.9), transparent);
+        }
+        
+        .member-info {
+            padding: 25px;
+        }
+        
+        .member-info h3 {
+            color: #5D8CAE;
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+        }
+        
+        .member-info .position {
+            color: #86ABA5;
+            font-style: italic;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        /* 联系方式 */
+        .contact {
+            padding: 80px 0;
+            background-color: white;
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+        
+        .contact-info {
+            background-color: #f8f9fa;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .contact-info h3 {
+            color: #5D8CAE;
+            margin-bottom: 25px;
+            font-size: 1.8rem;
+        }
+        
+        .contact-detail {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .contact-detail i {
+            font-size: 1.5rem;
+            color: #5D8CAE;
+            margin-right: 15px;
+            width: 30px;
+        }
+        
+        .contact-form {
+            background-color: #f8f9fa;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .contact-form h3 {
+            color: #5D8CAE;
+            margin-bottom: 25px;
+            font-size: 1.8rem;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #5D8CAE;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: #5D8CAE;
+            outline: none;
+        }
+        
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        /* 页脚 */
+        footer {
+            background-color: #5D8CAE;
+            color: white;
+            padding: 40px 0 20px;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .social-links {
+            margin: 20px 0;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 1.8rem;
+            margin: 0 15px;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: #86ABA5;
+        }
+        
+        .copyright {
+            margin-top: 20px;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            padding-top: 20px;
+            width: 100%;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+            }
+            
+            nav ul {
+                margin-top: 20px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 5px;
+            }
+            
+            .banner h1 {
+                font-size: 2.5rem;
+            }
+            
+            .banner p {
+                font-size: 1.1rem;
+            }
+            
+            .service-grid,
+            .team-grid,
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 头部 -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">Yorozuya<span> Gin-chan</span></div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#team">Our Team</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 横幅 -->
+    <section class="banner" id="home">
+        <h1>Anything and Everything</h1>
+        <p>From finding lost items to life advice, Yorozuya is here to help with all your needs!</p>
+        <button class="btn">Get Assistance</button>
+    </section>
+
+    <!-- 服务介绍 -->
+    <section class="services" id="services">
+        <div class="container">
+            <h2 class="section-title">Our Services</h2>
+            <div class="service-grid">
+                <div class="service-card">
+                    <i class="fas fa-search"></i>
+                    <h3>Finding Lost Items</h3>
+                    <p>From lost pets to important documents, we'll help you find what you've lost.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-broom"></i>
+                    <h3>Daily Chores</h3>
+                    <p>Cleaning, shopping, waiting in line - we handle all your daily tasks.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-glass-cheers"></i>
+                    <h3>Event Planning</h3>
+                    <p>Birthday parties, wedding planning - we make your special days unforgettable.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-hands-helping"></i>
+                    <h3>Life Counseling</h3>
+                    <p>Troubled by life's problems? We provide professional advice and solutions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 人物介绍 -->
+    <section class="team" id="team">
+        <div class="container">
+            <h2 class="section-title">Our Team</h2>
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="member-img">🥷</div>
+                    <div class="member-info">
+                        <h3>Gintoki Sakata</h3>
+                        <p class="position">Owner / White Demon</p>
+                        <p>Former freedom fighter, current owner of Yorozuya. Although he appears lazy, he's reliable in critical moments with exceptional swordsmanship and insight.</p>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <div class="member-img">👓</div>
+                    <div class="member-info">
+                        <h3>Shinpachi Shimura</h3>
+                        <p class="position">Assistant / Straight Man</p>
+                        <p>The glasses are his true identity, excellent at comedic timing. While not particularly strong in combat, he's meticulous with paperwork and manages daily operations.</p>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <div class="member-img">👧</div>
+                    <div class="member-info">
+                        <h3>Kagura</h3>
+                        <p class="position">Fighter / Yato Tribe</p>
+                        <p>From the universe's strongest combat race, the Yato Tribe. Has an enormous appetite but superhuman strength. Handles security and physical tasks.</p>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <div class="member-img">🐕</div>
+                    <div class="member-info">
+                        <h3>Sadaharu</h3>
+                        <p class="position">Mascot / Guardian</p>
+                        <p>A giant cosmic creature, cute but extremely powerful. Likes to bite Gintoki's head. An indispensable member of Yorozuya.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 联系方式 -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2 class="section-title">Contact Us</h2>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h3>Contact Information</h3>
+                    <div class="contact-detail">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <p>Kabukicho 1-1-1, Shinjuku, Tokyo</p>
+                    </div>
+                    <div class="contact-detail">
+                        <i class="fas fa-phone"></i>
+                        <p>03-1234-5678</p>
+                    </div>
+                    <div class="contact-detail">
+                        <i class="fas fa-envelope"></i>
+                        <p>info@yorozuya.com</p>
+                    </div>
+                    <div class="contact-detail">
+                        <i class="fas fa-clock"></i>
+                        <p>Business Hours: 10:00 - 18:00 (Irregular holidays)</p>
+                    </div>
+                    <div class="contact-detail">
+                        <i class="fas fa-subway"></i>
+                        <p>5 min walk from Shinjuku Station East Exit</p>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <h3>Send Inquiry</h3>
+                    <form>
+                        <div class="form-group">
+                            <label for="name">Your Name</label>
+                            <input type="text" id="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <input type="text" id="subject" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Your Message</label>
+                            <textarea id="message" required></textarea>
+                        </div>
+                        <button type="submit" class="btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+                <div class="copyright">
+                    <p>© 2023 Yorozuya Gin-chan - All Rights Reserved</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 简单的表单提交提示
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your inquiry! We will respond as soon as possible.');
+            this.reset();
+        });
+        
+        // 导航平滑滚动
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                document.querySelector(targetId).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // 立即咨询按钮滚动到联系表单
+        document.querySelector('.banner .btn').addEventListener('click', function() {
+            document.querySelector('#contact').scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    </script>
+</body>
+</html>
